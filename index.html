@@ -322,14 +322,37 @@
             align-items: stretch;
         }
         .studio-reel {
-            position: relative; overflow: hidden; background: #000;
-            aspect-ratio: 9/16; max-height: 600px;
+            position: relative; overflow: hidden; background: #1a1a1a;
+            aspect-ratio: 9/16; max-height: 600px; border-radius: 4px;
+            cursor: pointer;
         }
-        .studio-reel iframe {
-            position: absolute; top: 0; left: -1px;
-            width: calc(100% + 2px); height: calc(100% + 200px); border: none;
-            clip-path: inset(0 0 200px 0);
+        .studio-reel video {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover;
         }
+        .studio-reel .play-icon {
+            position: absolute; inset: 0; display: flex;
+            align-items: center; justify-content: center;
+            pointer-events: none; transition: opacity 0.2s;
+        }
+        .studio-reel .play-icon.hidden { opacity: 0; }
+        .studio-reel .reel-mute {
+            position: absolute; bottom: 12px; left: 12px; z-index: 10;
+            background: rgba(0,0,0,0.5); border: none; border-radius: 50%;
+            width: 32px; height: 32px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; color: #fff;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .studio-reel:hover .reel-mute { opacity: 1; }
+        .studio-reel .reel-ig {
+            position: absolute; bottom: 14px; right: 14px; z-index: 10;
+            color: rgba(255,255,255,0.5); text-decoration: none;
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .studio-reel:hover .reel-ig { opacity: 1; }
+        .studio-reel .reel-ig:hover { color: #fff; }
+
         .studio-map {
             display: flex; flex-direction: column; gap: 24px;
         }
@@ -339,9 +362,7 @@
             transition: opacity 0.4s;
         }
         .studio-map iframe:hover { opacity: 1; }
-        .studio-map-info {
-            display: flex; flex-direction: column; gap: 6px;
-        }
+        .studio-map-info { display: flex; flex-direction: column; gap: 6px; }
         .studio-map-info p {
             font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.7;
         }
@@ -358,31 +379,39 @@
         #reels .section-header .label { color: rgba(255,255,255,0.35); }
         #reels .rule { background: rgba(255,255,255,0.12); }
         .reels-row {
-            display: flex; gap: 16px; justify-content: center;
-            flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 16px; max-width: 1000px; margin: 0 auto; padding: 0 24px;
         }
         .reel-card {
-            flex: 0 0 280px; position: relative; overflow: hidden;
-            background: #000; aspect-ratio: 9/16;
+            position: relative; overflow: hidden; background: #1a1a1a;
+            aspect-ratio: 9/16; border-radius: 4px; cursor: pointer;
         }
-        .reel-card iframe {
-            position: absolute; top: 0; left: -1px;
-            width: calc(100% + 2px); height: calc(100% + 200px); border: none;
-            clip-path: inset(0 0 200px 0);
+        .reel-card video {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover;
         }
-        .reel-card .reel-overlay {
+        .reel-card .play-icon {
             position: absolute; inset: 0; display: flex;
-            align-items: flex-end; justify-content: flex-end; padding: 14px;
-            opacity: 0; transition: opacity 0.4s; z-index: 2;
+            align-items: center; justify-content: center;
+            pointer-events: none; transition: opacity 0.2s;
         }
-        .reel-card:hover .reel-overlay { opacity: 1; }
-        .reel-overlay a {
-            color: #fff; text-decoration: none; font-size: 0.55rem;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            background: rgba(0,0,0,0.5); padding: 6px 12px;
-            transition: background 0.3s;
+        .reel-card .play-icon.hidden { opacity: 0; }
+        .reel-card .reel-mute {
+            position: absolute; bottom: 12px; left: 12px; z-index: 10;
+            background: rgba(0,0,0,0.5); border: none; border-radius: 50%;
+            width: 32px; height: 32px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; color: #fff;
+            opacity: 0; transition: opacity 0.2s;
         }
-        .reel-overlay a:hover { background: rgba(0,0,0,0.8); }
+        .reel-card:hover .reel-mute { opacity: 1; }
+        .reel-card .reel-ig {
+            position: absolute; bottom: 14px; right: 14px; z-index: 10;
+            color: rgba(255,255,255,0.5); text-decoration: none;
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .reel-card:hover .reel-ig { opacity: 1; }
+        .reel-card .reel-ig:hover { color: #fff; }
         .reels-follow {
             text-align: center; margin-top: 48px;
         }
@@ -505,8 +534,7 @@
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
             .studio-grid { grid-template-columns: 1fr; }
             .studio-reel { max-height: 500px; }
-            .reels-row { gap: 12px; }
-            .reel-card { flex: 0 0 200px; }
+            .reels-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .reviews-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; gap: 60px; }
             .footer-inner { flex-direction: column; text-align: center; }
@@ -516,7 +544,7 @@
             .hero-ctas { flex-direction: column; align-items: center; }
             .btn { width: 100%; max-width: 260px; text-align: center; }
             .portfolio-grid { grid-template-columns: 1fr; }
-            .reel-card { flex: 0 0 45%; }
+            .reels-row { grid-template-columns: 1fr 1fr; }
         }
 
         .magnetic { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -676,8 +704,15 @@
                 <div class="rule reveal stagger-2"></div>
             </div>
             <div class="studio-grid">
-                <div class="studio-reel reveal-left">
-                    <iframe src="https://www.instagram.com/reel/C3J9tZaONpe/embed/" allowfullscreen loading="lazy" title="ACME Studios tour"></iframe>
+                <div class="studio-reel reveal-left" data-reel>
+                    <video src="reels/tour.mp4" playsinline loop muted preload="metadata" aria-label="ACME Studios tour"></video>
+                    <div class="play-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/><polygon points="19,14 37,24 19,34" fill="rgba(255,255,255,0.9)"/></svg>
+                    </div>
+                    <button class="reel-mute" aria-label="Toggle mute">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    </button>
+                    <a class="reel-ig" href="https://www.instagram.com/reel/C3J9tZaONpe/" target="_blank" rel="noopener">IG &#8599;</a>
                 </div>
                 <div class="studio-map reveal-right">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2647.5!2d-123.3679295!3d48.4271792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548f759ea99d7eb1%3A0x7f0f5047244e787d!2sAcme%20Studios!5e0!3m2!1sen!2sca!4v1700000000000!5m2!1sen!2sca" allowfullscreen loading="lazy" title="ACME Studios location map" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -700,23 +735,35 @@
             </div>
         </div>
         <div class="reels-row">
-            <div class="reel-card reveal-scale stagger-1">
-                <iframe src="https://www.instagram.com/reel/DR1JLd4ESEQ/embed/" allowfullscreen loading="lazy" title="Tattoo reel 1"></iframe>
-                <div class="reel-overlay">
-                    <a href="https://www.instagram.com/reel/DR1JLd4ESEQ/" target="_blank" rel="noopener">View &rarr;</a>
+            <div class="reel-card reveal-scale stagger-1" data-reel>
+                <video src="reels/reel1.mp4" playsinline loop muted preload="metadata" aria-label="Tattoo reel 1"></video>
+                <div class="play-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/><polygon points="19,14 37,24 19,34" fill="rgba(255,255,255,0.9)"/></svg>
                 </div>
+                <button class="reel-mute" aria-label="Toggle mute">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+                <a class="reel-ig" href="https://www.instagram.com/reel/DR1JLd4ESEQ/" target="_blank" rel="noopener">IG &#8599;</a>
             </div>
-            <div class="reel-card reveal-scale stagger-2">
-                <iframe src="https://www.instagram.com/reel/DRWI9n_kRwj/embed/" allowfullscreen loading="lazy" title="Tattoo reel 2"></iframe>
-                <div class="reel-overlay">
-                    <a href="https://www.instagram.com/reel/DRWI9n_kRwj/" target="_blank" rel="noopener">View &rarr;</a>
+            <div class="reel-card reveal-scale stagger-2" data-reel>
+                <video src="reels/reel2.mp4" playsinline loop muted preload="metadata" aria-label="Tattoo reel 2"></video>
+                <div class="play-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/><polygon points="19,14 37,24 19,34" fill="rgba(255,255,255,0.9)"/></svg>
                 </div>
+                <button class="reel-mute" aria-label="Toggle mute">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+                <a class="reel-ig" href="https://www.instagram.com/reel/DRWI9n_kRwj/" target="_blank" rel="noopener">IG &#8599;</a>
             </div>
-            <div class="reel-card reveal-scale stagger-3">
-                <iframe src="https://www.instagram.com/reel/DRWIrIXESQS/embed/" allowfullscreen loading="lazy" title="Tattoo reel 3"></iframe>
-                <div class="reel-overlay">
-                    <a href="https://www.instagram.com/reel/DRWIrIXESQS/" target="_blank" rel="noopener">View &rarr;</a>
+            <div class="reel-card reveal-scale stagger-3" data-reel>
+                <video src="reels/reel3.mp4" playsinline loop muted preload="metadata" aria-label="Tattoo reel 3"></video>
+                <div class="play-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.45)"/><polygon points="19,14 37,24 19,34" fill="rgba(255,255,255,0.9)"/></svg>
                 </div>
+                <button class="reel-mute" aria-label="Toggle mute">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+                <a class="reel-ig" href="https://www.instagram.com/reel/DRWIrIXESQS/" target="_blank" rel="noopener">IG &#8599;</a>
             </div>
         </div>
         <div class="reels-follow reveal">
@@ -894,6 +941,40 @@
                 btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
             });
         }
+
+        // Reel players — click to play/pause, mute toggle
+        document.querySelectorAll('[data-reel]').forEach(card => {
+            const video = card.querySelector('video');
+            const playIcon = card.querySelector('.play-icon');
+            const muteBtn = card.querySelector('.reel-mute');
+            const muteSvg = muteBtn.querySelector('svg');
+
+            const volOff = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+            const volOn = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+
+            // Click card to play/pause
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.reel-mute') || e.target.closest('.reel-ig')) return;
+                if (video.paused) {
+                    video.play();
+                    playIcon.classList.add('hidden');
+                } else {
+                    video.pause();
+                    playIcon.classList.remove('hidden');
+                }
+            });
+
+            // Mute toggle
+            muteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                video.muted = !video.muted;
+                muteSvg.innerHTML = video.muted ? volOff : volOn;
+            });
+
+            // Sync play icon with video state
+            video.addEventListener('pause', () => playIcon.classList.remove('hidden'));
+            video.addEventListener('play', () => playIcon.classList.add('hidden'));
+        });
 
         // Contact form
         document.getElementById('contactForm').addEventListener('submit', (e) => {
