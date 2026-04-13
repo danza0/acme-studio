@@ -318,16 +318,17 @@
         #studio .section-header .label { color: rgba(255,255,255,0.35); }
         #studio .rule { background: rgba(255,255,255,0.12); }
         .studio-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
             align-items: stretch;
         }
         .studio-reel {
-            position: relative; overflow: hidden; background: #111;
+            position: relative; overflow: hidden; background: #000;
             aspect-ratio: 9/16; max-height: 600px;
         }
         .studio-reel iframe {
-            position: absolute; top: -60px; left: 0;
-            width: 100%; height: calc(100% + 120px); border: none;
+            position: absolute; top: 0; left: -1px;
+            width: calc(100% + 2px); height: calc(100% + 200px); border: none;
+            clip-path: inset(0 0 200px 0);
         }
         .studio-map {
             display: flex; flex-direction: column; gap: 24px;
@@ -356,20 +357,18 @@
         #reels .section-header h2 { color: #fff; }
         #reels .section-header .label { color: rgba(255,255,255,0.35); }
         #reels .rule { background: rgba(255,255,255,0.12); }
-        .reels-scroll {
-            display: flex; gap: 16px; overflow-x: auto; padding: 0 24px;
-            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+        .reels-row {
+            display: flex; gap: 16px; justify-content: center;
+            flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 24px;
         }
-        .reels-scroll::-webkit-scrollbar { display: none; }
         .reel-card {
-            flex: 0 0 300px; scroll-snap-align: start;
-            position: relative; overflow: hidden; background: #111;
-            aspect-ratio: 9/16;
+            flex: 0 0 280px; position: relative; overflow: hidden;
+            background: #000; aspect-ratio: 9/16;
         }
         .reel-card iframe {
-            position: absolute; top: -60px; left: 0;
-            width: 100%; height: calc(100% + 120px); border: none;
+            position: absolute; top: 0; left: -1px;
+            width: calc(100% + 2px); height: calc(100% + 200px); border: none;
+            clip-path: inset(0 0 200px 0);
         }
         .reel-card .reel-overlay {
             position: absolute; inset: 0; display: flex;
@@ -395,7 +394,7 @@
         .reels-follow a:hover { color: #fff; }
 
         /* ── REVIEWS ── */
-        #reviews { background: var(--bg); }
+        #reviews { background: var(--bg-alt); }
         .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
         .review-card {
             border: 1px solid var(--border); padding: 44px 32px;
@@ -420,7 +419,7 @@
         .reviews-link a:hover { opacity: 0.5; transform: translateX(6px); }
 
         /* ── CONTACT ── */
-        #contact { background: var(--bg-alt); padding: 120px 0; }
+        #contact { background: var(--bg); padding: 120px 0; }
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
         .contact-info h3 {
             font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
@@ -506,7 +505,8 @@
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
             .studio-grid { grid-template-columns: 1fr; }
             .studio-reel { max-height: 500px; }
-            .reel-card { flex: 0 0 260px; }
+            .reels-row { gap: 12px; }
+            .reel-card { flex: 0 0 200px; }
             .reviews-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; gap: 60px; }
             .footer-inner { flex-direction: column; text-align: center; }
@@ -516,7 +516,7 @@
             .hero-ctas { flex-direction: column; align-items: center; }
             .btn { width: 100%; max-width: 260px; text-align: center; }
             .portfolio-grid { grid-template-columns: 1fr; }
-            .reel-card { flex: 0 0 220px; }
+            .reel-card { flex: 0 0 45%; }
         }
 
         .magnetic { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -699,7 +699,7 @@
                 <div class="rule reveal stagger-2"></div>
             </div>
         </div>
-        <div class="reels-scroll">
+        <div class="reels-row">
             <div class="reel-card reveal-scale stagger-1">
                 <iframe src="https://www.instagram.com/reel/DR1JLd4ESEQ/embed/" allowfullscreen loading="lazy" title="Tattoo reel 1"></iframe>
                 <div class="reel-overlay">
